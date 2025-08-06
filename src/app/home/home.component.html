@@ -1,1 +1,75 @@
-<p>home works!</p>
+<app-header></app-header>
+<div class="container">
+    <div class="row p-5 bg-success">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 text-white">
+            <h1>The Easiest way <br> to Make Your <br>Favourite Meal</h1>
+            <p class="mt-3">Discover 100+ recipes in your hand with the best recipes. Helps you to find the easiest way
+                to cook.</p>
+            <button class="btn btn-warning mt-3"> Explore Recipes</button>
+        </div>
+        <div class="col-md-6">
+            <img id="plate" class="img-fluid" src="plate.png" alt="image">
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h1>Popular Recipe of the week</h1>
+        <div class="d-flex justify-content-between mt-2">
+            <p>Our most popular recipes of the week</p>
+            <p routerLink="'/all-recipes">View All</p>
+        </div>
+        @if(HomeRecipe.length>0){
+        @for(item of HomeRecipe; track $index){
+        <div class="col-md-4">
+            <div class="card rounded-0 border-0">
+                <img [src]="item.image" class="card-img-top rounded-0" alt="pizza">
+                <div class="card-body">
+                    <p class="card-title text-center">{{item.name}}</p>
+                </div>
+            </div>
+        </div>
+        }
+        } @else {
+        <h2>No Item to show</h2>
+        }
+    </div>
+    <div id="homeimage" class="row mt-3">
+        <div class="col-md-4 bg-secondary-subtle m-md-5 p-md-3 m-3">
+            <h4>50+ Recipes that are Very <br>Quick and Fast</h4>
+            <p class="mt-3">Find the perfect food ideas to start your day <br> the quick and easiest way.</p>
+        </div>
+        <div class="col-md-8"></div>
+    </div>
+    <div class="row bg-success mt-5">
+        <div class="col-md-7 mt-4 text-center">
+            <img class="img-fluid" src="laptops.png" alt="laptops">
+        </div>
+        <div class="col-md-5 mt-5 text-white px-4">
+            <h1>Download App</h1>
+            <p class="my-3">Download the App from App store or <br>Google Play for better Experience</p>
+            <div class="d-flex mb-5">
+                <img width="150px" class="img-fluid me-4" src="appdownload1.png" alt="download">
+                <img width="150px" class="img-fluid" src="appdownload2.png" alt="download">
+            </div>
+        </div>
+    </div>
+    <div class="row my-5">
+        <h1 class="text-center">Client Testimonials</h1>
+        @if(TestimonialsToHome.length>0){
+        @for(item of TestimonialsToHome; track $index){
+        <div class="col-md-4 mt-4 ">
+            <div class="border shadow p-4">
+                <h3>{{item.name}}</h3>
+                <p>{{item.message}}</p>
+            </div>
+        </div>
+        }
+        } @else {
+        <h2>No Testimonial to show</h2>
+        }
+
+
+
+
+    </div>
+</div>

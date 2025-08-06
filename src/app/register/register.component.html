@@ -1,1 +1,41 @@
-<p>register works!</p>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <form (ngSubmit)="register()" [formGroup]="registerForm"
+                class="p-5 m-5 shadow rounded d-flex flex-column justify-content-center align-items center">
+                <!-- submit will work only if form tag and button type submit -->
+                <h2 class="text-center mb-5"><i class="fa-solid fa-kitchen-set me-2"></i>Cookpedia</h2>
+                <div class="my-3"><input class="form-control" name="username" formControlName="username"
+                        placeholder="Username" name="" id="">
+                    @if(registerForm.get("username")?.errors && registerForm.get("username")?.touched)
+                    {<span class="text-danger" style="font-size: 10px;">*Input value must be alphabets</span>}
+                </div>
+                <div class="mb-3"><input name="email" formControlName="email" class="form-control" type="text"
+                        placeholder="Email" name="" id="">
+                    @if(registerForm.get("email")?.errors && registerForm.get("email")?.touched){<span
+                        class="text-danger" style="font-size: 10px;">*Input value must be an email</span>}
+                </div>
+                <div class="mb-3"><input name="password" formControlName="password" class="form-control" type="text"
+                        placeholder="Password" name="" id="">
+                    @if(registerForm.get("password")?.errors && registerForm.get("password")?.touched){<span
+                        class="text-danger" style="font-size: 10px;">*Input value must be alphabets or numbers</span>}
+                </div>
+                <div class="mt-2"><button type="submit"
+                        class="form-control btn btn-success text-white">Register</button></div>
+                <p class="text-center mt-1">Already a user? <a routerLink="/login">Login</a></p>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <h1>Create an Account</h1>
+                <h5>What you will get?</h5>
+                <ul class="mt-4">
+                    <li>Different Recipe</li>
+                    <li>Easy way to Cook</li>
+                    <li>Save your Favourite recipe</li>
+                    <li>Download your Recipe</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

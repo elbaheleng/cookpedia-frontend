@@ -1,1 +1,44 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg bg-success mt-5 container">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" routerLink="/"><i class="fa-solid fa-kitchen-set me-2"></i>Cookpedia</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link text-white" aria-current="page">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/all-recipes" class="nav-link text-white" aria-current="page">Recipe</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/about" class="nav-link text-white" aria-current="page">About</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact"  class="nav-link text-white" aria-current="page">Contact</a>
+        </li>
+      </ul>
+      
+      <div class="dropdown ms-auto">
+  <button class="btn btn-outline-light btn-transparent dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-user me-2"></i> 
+    @if(isLoggedIn)
+    {<span>Hi {{username}}</span>}
+  </button>
+  <ul class="dropdown-menu">
+    @if (!isLoggedIn) {
+    <li><a routerLink="/login" class="dropdown-item">Login</a></li>
+    <li><a routerLink="/register" class="dropdown-item">Register</a></li>
+    }
+    @if(isLoggedIn){
+    <li><a routerLink="/profile" class="dropdown-item">Profile</a></li>
+    <li><a routerLink="/saved-recipes" class="dropdown-item">Saved Recipes</a></li>
+    <li><a (click)="logout()" class="dropdown-item">Logout</a></li>
+  }
+  </ul>
+</div>
+    </div>
+  </div>
+</nav>
+

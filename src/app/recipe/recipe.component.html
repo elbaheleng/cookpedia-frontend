@@ -1,1 +1,55 @@
-<p>recipe works!</p>
+<app-header></app-header>
+
+<div class="container my-5">
+    <p class="text-success">{{time | date : "fullDate"}}</p>
+    <div class="row">
+        <div class="col-md-4">
+            <h4 class="mt-5">Filter</h4>
+
+            <div class="mt-5"><button (click)="nofilter()" class='btn'>All</button></div><br />
+
+
+
+            <button class="btn" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
+                aria-controls="collapseExample1">
+                Cuisine Type
+            </button><br />
+            <div class="collapse" id="collapseExample1">
+                @for(item of cuisineType; track $index)
+                {<button (click)="filterCuisine(item)" class="btn">{{item}}</button>}
+            </div><br />
+            <button class="btn" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
+                aria-controls="collapseExample2">
+                Meal Type
+            </button>
+            <div class="collapse" id="collapseExample2">
+                @for(item of mealType; track $index){
+                <button class="btn" (click)="filterMealType(item)">{{item}}</button>
+                }
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between">
+                <h1>All Recipes</h1>
+                <input [(ngModel)]="searchKey" class="form-control w-50" placeholder="Search recipes here!" type="text"
+                    name="" id="">
+            </div>
+            @if(AllRecipe.length>0){
+            <div class="row">
+                @for(item of AllRecipe | search : searchKey | paginate: { itemsPerPage: 6, currentPage: p }; track $index){
+                <div class="col-md-4 p-4">
+                    <img (click)="viewrecipe(item._id)" [src]="item.image" alt="no image" class="w-100 rounded">
+                    <h5 class="mt-2">{{item.name}}</h5>
+                    <p>Cuisine: {{item.cuisine}}</p>
+                </div>
+                }
+            </div>
+            } @else {
+            <h3>Loading.</h3>
+            }
+            <div class="d-flex justify-content-center align-items-center my-5">
+                 <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

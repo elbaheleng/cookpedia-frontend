@@ -1,0 +1,39 @@
+<app-adminheader></app-adminheader>
+<div class="container-fluid p-0 overflow-x-hidden">
+    <div class="row">
+        <div class="col-md-2 p-0">
+            <app-adminsidebar></app-adminsidebar>
+        </div>
+        <div class="col-md-10 p-0">
+            <div class="w-100 bg-warning p-3">
+                <h1><i class="fa-soild fa-users me-3"></i>Users</h1>
+            </div>
+            <h3 class="text-center my-3">User List</h3>
+            @if(allUsers.length>0){
+            <div class="table-responsive px-4 my-5">
+                <table class="table table-bordered shadow">
+                    <thead>
+                        <tr>
+                            <th class="bg-success text-light">Sl.No.</th>
+                            <th class="bg-success text-light">Name</th>
+                            <th class="bg-success text-light">Email Id</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of allUsers; track $index) {
+
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.username}}</td>
+                            <td>{{item.email}}</td>
+                        </tr> }
+                    </tbody>
+
+                </table>
+            </div>}
+            @else {
+            <h3 class="text-danger">No Users..</h3>
+            }
+        </div>
+    </div>
+</div>

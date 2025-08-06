@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container my-5">
+    <h1 class="text-center text-success">Profile</h1>
+    <div class="row mt-5 px-5 d-flex justify-content-between align-items-center">
+        <div class="col-md-6" style="text-align: justify;">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa molestiae vero saepe dolor sed eius
+                recusandae id beatae mollitia delectus! Sed illo magnam sapiente veritatis, ratione temporibus quasi non
+                voluptatum!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui suscipit quod, odio sed explicabo modi
+                placeat ad obcaecati. Aliquid molestiae accusamus asperiores fugiat inventore commodi, deleniti
+                molestias necessitatibus placeat rerum.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="shadow rounded p-4 d-flex justify-content-between align-items-center flex-column">
+                <label for="profile">
+                    <input (change)="getFile($event)" id="profile" type="file" style="display: none;">
+                    <img [src]="uploadedImage == '' ? 
+                        'https://cdn-icons-png.flaticon.com/512/9187/9187604.png':uploadedImage" alt="no image"
+                        style="width: 150px; height: 150px; border-radius: 50%;">
+                </label>
+                <button (click)="upload()" class="btn btn-success mt-5 w-100">Upload</button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row my-5">
+        <h3 class="mb-4">Downloaded Recipes</h3>
+        @if(downloadedRecipes.length>0){
+        @for (item of downloadedRecipes; track $index) {
+        <div class="col-md-3 p-3">
+            <img [src]="item.image" style="width: 200px; height: 200px;">
+            <h5>{{item.name}}</h5>
+            <p>{{item.cuisine}}</p>
+        </div>
+        }
+
+        } @else {
+        <p>No Downloads yet...</p>
+
+        }
+    </div>
+
+
+</div>

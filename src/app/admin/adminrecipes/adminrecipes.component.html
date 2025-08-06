@@ -1,0 +1,154 @@
+<app-adminheader></app-adminheader>
+<div class="container-fluid p-0 overflow-x-hidden">
+    <div class="row">
+        <div class="col-md-2 p-0">
+            <app-adminsidebar></app-adminsidebar>
+        </div>
+        <div class="col-md-10 p-0">
+            <div class="w-100 bg-warning p-3">
+                <h1><i class="fa-soild fa-bowl-rice me-3"></i>Recipes</h1>
+            </div>
+            <h3 class="text-center my-3">Recipe List</h3>
+            <div class="d-flex justify-content-between px-4 mt-4">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Add
+                    Recipe <i class="fa-solid fa-plus ms-2"></i> </button>
+                <input [(ngModel)]="searchKey" type="text" placeholder="name" class="form-control w-25">
+            </div>
+            @if(allRecipes.length>0){
+            <div class="table-responsive px-4 my-5">
+                <table class="table table-bordered shadow">
+                    <thead>
+                        <tr>
+                            <th class="bg-success text-light">Sl.No.</th>
+                            <th class="bg-success text-light">Name</th>
+                            <th class="bg-success text-light">Image</th>
+                            <th class="bg-success text-light">Cuisine</th>
+                            <th class="bg-success text-light">...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of allRecipes | search : searchKey; track $index) {
+
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.name}}</td>
+                            <td><img [src]="item.image" height="80px" alt="no image"></td>
+                            <td>{{item.cuisine}}</td>
+                            <td>
+                                <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-square"></i></button>
+                                <button (click)="deleteRecipe(item._id)" class="btn btn-outline-danger ms-4"><i
+                                        class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr> }
+                    </tbody>
+
+                </table>
+            </div>}
+            @else {
+            <h3 class="text-danger">No Recipes..</h3>
+            }
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h1 class="modal-title fs-3" id="exampleModalLabel">Recipe Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="recipeForm">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input class="form-control" name="recipename" formControlName="recipename" placeholder="Name of the recipe" type="text">
+                                     @if(recipeForm.get("recipename")?.errors && recipeForm.get("recipename")?.touched){<span
+                                        class="text-danger" style="font-size: 10px;">*Input value should contain alphabets only</span>}
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" name="preTime" formControlName="preTime" placeholder="Preparation Time"
+                                        type="text">
+                                    @if(recipeForm.get("preTime")?.errors && recipeForm.get("preTime")?.touched){<span
+                                        class="text-danger" style="font-size: 10px;">*Input value must be an number</span>}
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" name="calories" formControlName="calories"
+                                        placeholder="Calories per servings" type="text">
+                                    @if(recipeForm.get("calories")?.errors && recipeForm.get("calories")?.touched){<span
+                                        class="text-danger" style="font-size: 10px;">*Input value must be an number</span>}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <input class="form-control" name="cookingTime" formControlName="cookingTime" placeholder="Cooking Time" type="text">
+                                     @if(recipeForm.get("cookingTime")?.errors && recipeForm.get("cookingTime")?.touched){<span
+                                        class="text-danger" style="font-size: 10px;">*Input value must be an number</span>}
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" name="serving"  formControlName="serving" placeholder="Servings" type="text">
+                                     @if(recipeForm.get("serving")?.errors && recipeForm.get("serving")?.touched){<span
+                                        class="text-danger" style="font-size: 10px;">*Input value must be an number</span>}
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" name="rating"  formControlName="rating" placeholder="Ratings" type="text">
+                                     @if(recipeForm.get("rating")?.errors && recipeForm.get("rating")?.touched){<span
+                                        class="text-danger" style="font-size: 10px;">*Input value must be an number</span>}
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="row">
+                            <div class="mb-3">
+                                <select class="form-control" name="modeofcooking" formControlName="modeofcooking">
+                                    <option disabled [defaultSelected]="true" value="">Choose Mode of Cooking</option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Difficult">Difficult</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <ng-multiselect-dropdown [placeholder]="'Select Meal Type'" [settings]="dropdownSettings"
+                                    [data]="dropdownList"
+                                     (onDeSelectAll)="onDeselectAll()"
+                                      (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelect)="onItemDeselect($event)"
+                                    >
+                                    
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="cuisineType" formControlName="cuisineType">
+                                    <option disabled [defaultSelected]="true" value="0">Cuisine Type</option>
+                                    @for (item of cuisineType; track $index) {
+                                    <option [value]="item">{{item}}</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3 d-flex">
+                                <input #ingre class="form-control rounded-0" placeholder="Ingredients" type="text">
+                                <button (click)="addIngredient(ingre)" class="btn btn-success rounded-0">Add</button>
+                            </div>
+                            <div class="mb-3 d-flex">
+                                <input #inst class="form-control rounded-0" placeholder="Instructions" type="text">
+                                <button  (click)="addInstruction(inst)" class="btn btn-success rounded-0">Add</button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipeImg">Upload Image</label>
+                                <input (change)="getFile($event)" type="file" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Reset</button>
+                <button (click)="save()" type="button" class="btn btn-success">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

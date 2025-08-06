@@ -1,0 +1,78 @@
+<app-adminheader></app-adminheader>
+<div class="container-fluid p-0 overflow-x-hidden">
+    <div class="row">
+        <div class="col-md-2 p-0">
+            <app-adminsidebar></app-adminsidebar>
+        </div>
+        <div class="col-md-10 p-0 m-0">
+            <div class="w-100 bg-warning p-3">
+                <h1> <i class="fa-solid fa-bars me-2"></i>
+                    Dashboard
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-md-3 py-3 px-4">
+                    <div class="w-100 bg-info p-3 rounded">
+                        <div class="row">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-users fa-2x"></i>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>Users {{allUsers.length}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 py-3 px-4">
+                    <div class="w-100 bg-danger p-3 rounded">
+                        <div class="row">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center text-white">
+                                <i class="fa-solid fa-bowl-rice fa-2x"></i>
+                            </div>
+                            <div class=" text-white col-md-4">
+                                <h3>Recipes {{allRecipes.length}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 py-3 px-4">
+                    <div class="w-100 bg-primary p-3 rounded">
+                        <div class="row">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-download fa-2x"></i>
+                            </div>
+                            <div class="col-md-4">
+                                <h3>Downloads {{downloadCount}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 py-3 px-4">
+                    <div class="w-100 bg-secondary p-3 rounded">
+                        <div class="row">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center text-white">
+                                <i class="fa-solid fa-message fa-2x"></i>
+                            </div>
+                            <div class="col-md-4 text-white">
+                                <h3>Notification {{allPendingTestimonials.length}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <highcharts-chart  [options]="chartOptions" class="chart" />
+
+                </div>
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                    <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar [(selected)]="selected"></mat-calendar>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h1 class="text-center mt-5">Login</h1>
+            <p class="text-center">More than 100+ recipes around the world</p>
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="p-5 m-5 shadow rounded d-flex flex-column justify-content-center align-items center">
+                    <h2 class="text-center mb-5"><i class="fa-solid fa-kitchen-set me-2"></i>Cookpedia</h2>
+                    
+                    <div class="my-3"><input formControlName="email" name="email" class="form-control" type="text" placeholder="Email" name="" id="">
+                     @if(loginForm.get("email")?.errors && loginForm.get("email")?.touched){<span
+                        class="text-danger" style="font-size: 10px;">*Input value must be an email</span>}</div>
+                    <div class="mb-3"><input formControlName="password" name="password"  class="form-control" type="text" placeholder="Password" name="" id="">
+                    @if(loginForm.get("password")?.errors && loginForm.get("password")?.touched){<span
+                        class="text-danger" style="font-size: 10px;">*Input value must be alphabets or numbers</span>}</div>
+                <div class="mt-2"><button type="submit" class="form-control btn btn-success text-white">Login</button></div>
+                <p class="text-center mt-1">New user? <a routerLink="/register">Register</a></p>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+<app-adminheader></app-adminheader>
+<div class="container-fluid p-0 overflow-x-hidden">
+    <div class="row">
+        <div class="col-md-2 p-0">
+            <app-adminsidebar></app-adminsidebar>
+        </div>
+        <div class="col-md-10 p-0">
+            <div class="w-100 bg-warning p-3">
+                <h1><i class="fa-soild fa-message me-3"></i>Requests</h1>
+            </div>
+            <h3 class="text-center my-3">All Testimonial Requests</h3>
+            @if(allTestimonials.length>0){
+            <div class="table-responsive px-4 my-5">
+                <table class="table table-bordered shadow">
+                    <thead>
+                        <tr>
+                            <th class="bg-success text-light">Sl.No.</th>
+                            <th class="bg-success text-light">User Name</th>
+                            <th class="bg-success text-light">User Email</th>
+                            <th class="bg-success text-light">Message</th>
+                            <th class="bg-success text-light">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of allTestimonials; track $index) {
+
+                        <tr>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.message}}</td>
+                            <td>
+                                @if(item.status=='pending'){
+                                <button type="button" (click)="statusChange(item._id,'approved')" class="btn btn-success me-2">Approve</button>
+                                <button type="button" (click)="statusChange(item._id,'rejected')" class="btn btn-danger">Rejected</button>
+                                } @else if(item.status=='approved'){
+                                    <h4 class="text-success">Approved</h4>
+                                }@else if(item.status=='rejected'){
+                                    <h4 class="text-danger">Rejected</h4>
+                                }@else {
+                                    <h4 class="text-success">Loading...</h4>
+                                }
+                            </td>
+                        </tr> }
+                    </tbody>
+                </table>
+            </div>}
+            @else {
+            <h3 class="text-danger">No Requests..</h3>
+            }
+        </div>
+    </div>
+</div>
